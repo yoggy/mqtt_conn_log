@@ -36,5 +36,5 @@ for supervisor
     $ sudo supervisorctl reread
     $ sudo supervisorctl add mqtt_tiny_clock_pub
     $ sudo supervisorctl status
-    mqtt_tiny_clock_pub                  RUNNING    pid 8192, uptime 0:00:30
+    mqtt_conn_log                  RUNNING    pid 8192, uptime 0:00:30
 
