@@ -31,10 +31,10 @@ for supervisor
 ----
     $ cd ~/work/mqtt_conn_log
     $ cp sudo cp mqtt_conn_log.conf.sample /etc/supervisor/conf.d/mqtt_conn_log.conf
-    $ sudo vi /etc/supervisor/conf.d/mqtt_tiny_clock_pub.conf
+    $ sudo vi /etc/supervisor/conf.d/mqtt_conn_log.conf
       (fix path, etc...)
     $ sudo supervisorctl reread
-    $ sudo supervisorctl add mqtt_tiny_clock_pub
+    $ sudo supervisorctl add mqtt_conn_log
     $ sudo supervisorctl status
     mqtt_conn_log                  RUNNING    pid 8192, uptime 0:00:30
 
