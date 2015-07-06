@@ -16,12 +16,12 @@ $config = Pit.get("mqtt_conn_log", :require => {
 	"mqtt_topic" => "mqtt_topic",
 })
 
-def split_host_port(str)
+def split_ip_port(str)
   ridx = str.rindex(".")
-  host = str[0, ridx]
+  ip   = str[0, ridx]
   port = str[ridx+1, str.size - ridx]
 
-  [host, port]
+  [ip, port]
 end
 
 MQTT::Client.connect(
@@ -56,14 +56,14 @@ MQTT::Client.connect(
         src_str = v[4][0, v[4].size-1]  # remove colon
         dst_str = v[2]
     
-        (src_host, src_port) = split_host_port(src_str)
-        (dst_host, dst_port) = split_host_port(dst_str)
+        (src_ip, src_port) = split_ip_port(src_str)
+        (dst_ip, dst_port) = split_ip_port(dst_str)
     
         h = {}
         h["timestamp"] = v[0]
-        h["src_host"]  = src_host
+        h["src_ip"]    = src_ip
         h["src_port"]  = src_port
-        h["dst_host"]  = dst_host
+        h["dst_ip"]    = dst_ip
         h["dst_port"]  = dst_port
     
         publish_str = JSON.generate(h)
