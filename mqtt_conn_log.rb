@@ -53,8 +53,8 @@ MQTT::Client.connect(
         #   21:01:02.899447 IP dst_host.example.com.http > src_host.example.com.12345: Flags [S.], seq ??????????, ack ?????????,....
         #
     
-        src_str = v[2]
-        dst_str = v[4][0, v[4].size-1]  # remove colon
+        src_str = v[4][0, v[4].size-1]  # remove colon
+        dst_str = v[2]
     
         (src_host, src_port) = split_host_port(src_str)
         (dst_host, dst_port) = split_host_port(dst_str)
