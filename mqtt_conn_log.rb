@@ -50,7 +50,7 @@ MQTT::Client.connect(
         #        .
         #        .
         # syn+ack 
-        #   21:01:02.899447 IP dst_host.example.com.http > src_host.example.com.12345: Flags [S.], seq ??????????, ack ?????????,....
+        #   21:01:02.899447 IP dst_host_ip.http > src_host_ip.12345: Flags [S.], seq ??????????, ack ?????????,....
         #
     
         src_str = v[4][0, v[4].size-1]  # remove colon
