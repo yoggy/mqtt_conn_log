@@ -24,7 +24,7 @@ how to use
     $ cd work
     $ git clone https://github.com/yoggy/mqtt_conn_log.git
     $ cd mqtt_conn_log
-    $ sudo tcpdump -l -i eth0 "tcp[13] & 18 == 18" 2>/dev/null | ./mqtt_conn_log.rb
+    $ sudo tcpdump -l -n -i eth0 "tcp[13] & 18 == 18" 2>/dev/null | ./mqtt_conn_log.rb
     
 
 for supervisor

@@ -17,7 +17,7 @@
 ;     http://supervisord.org/
 ;
 [program:mqtt_conn_log]
-command         = sh -c 'sudo tcpdump -l -i eth0 "tcp[13] & 18 == 18 && !(host 1,2,3,4)" 2>/dev/null | HOME=/home/username /usr/bin/ruby ./mqtt_conn_log.rb'
+command         = sh -c 'sudo tcpdump -l -n -i eth0 "tcp[13] & 18 == 18 && !(host 1,2,3,4)" 2>/dev/null | HOME=/home/username /usr/bin/ruby ./mqtt_conn_log.rb'
 directory       = /home/username/work/mqtt_conn_log/
 user            = username
 numprocs        = 1
