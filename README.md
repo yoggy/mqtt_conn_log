@@ -4,26 +4,24 @@ a simple logging tool for TCP connections.
 
 how to use
 ----
-
     
     $ sudo apt-get install tcpdump
     $ sudo gem install mqtt
-    $ sudo gem install pit
-    
-    $ EDITOR=vi pit set mqtt_conn_log
-    
-        ---
-        mqtt_host: mqtt.example.com
-        mqtt_port: 1883
-        mqtt_user: mqtt_user
-        mqtt_pass: mqtt_pass
-        mqtt_topic: mqtt_topic
-    
     $ cd ~
     $ mkdir -p work
     $ cd work
     $ git clone https://github.com/yoggy/mqtt_conn_log.git
     $ cd mqtt_conn_log
+    $ cp mqtt_config.yaml.sample mqtt_config.yaml
+    $ vi mqtt_config.yaml
+
+        host:     mqtt.example.com
+        port:     1883
+        use_auth: true
+        username: username
+        password: password
+        topic: publish_topic
+      
     $ sudo tcpdump -l -n -i eth0 "tcp[13] & 18 == 18" 2>/dev/null | ./mqtt_conn_log.rb
     
 

@@ -9,13 +9,10 @@ require 'pp'
 
 $stdout.sync = true
 
-$config = Pit.get("mqtt_conn_log", :require => {
-    "mqtt_host"  => "mqtt.example.com",
-    "mqtt_port"  => 1883,
-    "mqtt_user"  => "mqtt_user",
-    "mqtt_pass"  => "mqtt_pass",
-    "mqtt_topic" => "mqtt_topic",
-})
+$log = Logger.new(STDOUT)
+$log.level = Logger::DEBUG
+
+$mqtt_conf = YAML.load_file(File.dirname($0) + '/mqtt_config.yaml')
 
 def split_ip_port(str)
     ridx = str.rindex(".")
@@ -36,12 +33,16 @@ def gethostbyname(ip_str)
     host
 end
 
-MQTT::Client.connect(
-    :remote_host => $config['mqtt_host'],
-    :remote_port => $config['mqtt_port'].to_i,
-    :username    => $config['mqtt_user'],
-    :password    => $config['mqtt_pass']
-) do |c|
+conn_opts = {
+    "remote_host" => $mqtt_conf["host"],
+    "remote_port" => $mqtt_conf["port"]
+}
+if $mqtt_conf["use_auth"]
+  conn_opts["username"] = $mqtt_conf["username"]
+  conn_opts["password"] = $mqtt_conf["password"]
+end
+
+MQTT::Client.connect(conn_opts) do |c|
     while l = STDIN.gets
         l.chomp!
         v = l.split(/\s/)
@@ -85,7 +86,7 @@ MQTT::Client.connect(
     
         publish_str = JSON.generate(h)
     
-    	topic = $config["mqtt_topic"]
+    	topic = $mqtt_conf["topic"]
 
         puts "mqtt_publish : topic=#{topic}, publish_str=#{publish_str}"
         c.publish(topic, publish_str)
