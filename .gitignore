@@ -1,2 +1,5 @@
-*.sqp
+*.swp
+.DS_Store
+mqtt_config.yaml
+log.*
 
